@@ -1,18 +1,36 @@
 {
-  "name": "wilson-wm",
-  "version": "2.0.0",
-  "description": "WILSON WM Powerful MD Bot - By Daxman",
+  "name": "WILSON-WM",
+  "version": "1.0.0",
+  "description": "WILSON WM - Ultimate WhatsApp Bot with full commands, menu, AI features, games, and session pairing.",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "pair": "node pair.js",
+    "dev": "nodemon index.js",
+    "update": "git pull origin main && npm install"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOURUSERNAME/WILSON-WM.git"
+  },
+  "author": "Wilson WM | Daxman",
+  "license": "MIT",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.6.0",
-    "axios": "^1.6.0",
-    "chalk": "^5.3.0",
-    "pino": "^8.0.0",
-    "openai": "^4.0.0",
-    "ytdl-core": "^4.11.0"
+    "@whiskeysockets/baileys": "^5.0.1",
+    "axios": "^1.4.0",
+    "chalk": "^5.2.0",
+    "express": "^4.18.2",
+    "pino": "^8.16.2",
+    "node-fetch": "^3.3.2",
+    "fs-extra": "^11.1.1",
+    "moment": "^2.29.4",
+    "qrcode-terminal": "^0.12.0",
+    "openai": "^4.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
