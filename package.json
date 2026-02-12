@@ -1,0 +1,18 @@
+{
+  "name": "wilson-wm",
+  "version": "2.0.0",
+  "description": "WILSON WM Powerful MD Bot - By Daxman",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.0",
+    "chalk": "^5.3.0",
+    "pino": "^8.0.0",
+    "openai": "^4.0.0",
+    "ytdl-core": "^4.11.0"
+  }
+}
