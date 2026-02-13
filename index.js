@@ -1,9 +1,8 @@
 import { writeFileSync, existsSync, mkdirSync } from "fs";
-import { createServer } from "http";
 import express from "express";
 import chalk from "chalk";
 import { makeWASocket, useSingleFileAuthState } from "@whiskeysockets/baileys";
-import { sessionFilePath } from "./config.js"; // make a config.js if needed
+import { sessionFilePath, botConfig } from "./config.js";
 
 // Create session folder if not exists
 if (!existsSync("./session")) {
@@ -11,10 +10,10 @@ if (!existsSync("./session")) {
 }
 
 // Initialize WhatsApp connection
-const { state, saveState } = useSingleFileAuthState(sessionFilePath || "./session/session.json");
+const { state, saveState } = useSingleFileAuthState(sessionFilePath);
 
 const startBot = async () => {
-  console.log(chalk.green("[WILSON WM] Starting bot..."));
+  console.log(chalk.green(`[${botConfig.botName}] Starting bot...`));
 
   // Create WhatsApp socket
   const sock = makeWASocket({
@@ -27,10 +26,15 @@ const startBot = async () => {
 
   // Handle incoming messages
   sock.ev.on("messages.upsert", async (m) => {
-    console.log(chalk.blue("[WILSON WM] Message received:"), m.messages[0].message);
-    // Example: Auto reply
-    if (m.messages[0].message.conversation === "hi") {
-      await sock.sendMessage(m.messages[0].key.remoteJid, { text: "Hello! I am WILSON WM Bot 🤖" });
+    const message = m.messages[0];
+    const messageText = message.message.conversation;
+
+    console.log(chalk.blue(`[${botConfig.botName}] Message received:`), messageText);
+
+    const replyText = botConfig.autoReply[messageText.toLowerCase()];
+    if (replyText) {
+      await sock.sendMessage(message.key.remoteJid, { text: replyText });
+      console.log(chalk.green(`[${botConfig.botName}] Replied to ${message.key.remoteJid}`));
     }
   });
 };
