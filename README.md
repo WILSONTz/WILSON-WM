@@ -1,18 +1,20 @@
 <p align="center">
+  <h1>WILSON WM</h1>
   <img src="https://raw.githubusercontent.com/WILSONTz/WILSON-WM/29b139a0bf5b7767b9ed12551122a69fe21dcff3/_20260212_221303.JPG" width="500">
 </p>
-
-<h1 align="center">WILSON WM</h1>
 
 <p align="center">
   Powerful WhatsApp Bot • Fast • Reliable
 </p>
-**Ultimate WhatsApp Bot with:**
-- Full Menu & Commands
-- Games
-- Download Media
-- AI Features
-- Session Pairing
+
+---
+
+## ⚡ Ultimate WhatsApp Bot Features
+- Full Menu & Commands  
+- Games  
+- Download Media  
+- AI Features  
+- Session Pairing  
 
 ---
 
