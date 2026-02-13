@@ -1,40 +1,37 @@
-import { writeFileSync, existsSync, mkdirSync } from "fs";
-import express from "express";
+// index.js
+
+import { existsSync, mkdirSync } from "fs";
 import chalk from "chalk";
 import { makeWASocket, useSingleFileAuthState } from "@whiskeysockets/baileys";
-import { sessionFilePath, botConfig } from "./config.js";
+import config from "./config.js";
 
-// Create session folder if not exists
-if (!existsSync("./session")) {
-  mkdirSync("./session");
-}
+// Ensure session folder exists
+if (!existsSync(config.session.folder)) mkdirSync(config.session.folder);
 
-// Initialize WhatsApp connection
-const { state, saveState } = useSingleFileAuthState(sessionFilePath);
+// WhatsApp authentication
+const { state, saveState } = useSingleFileAuthState(
+  `${config.session.folder}/${config.session.sessionFile}`
+);
 
 const startBot = async () => {
-  console.log(chalk.green(`[${botConfig.botName}] Starting bot...`));
+  console.log(chalk.green(`[${config.botInfo.name}] Starting bot...`));
 
-  // Create WhatsApp socket
   const sock = makeWASocket({
     auth: state,
     printQRInTerminal: true
   });
 
-  // Save session updates
   sock.ev.on("creds.update", saveState);
 
-  // Handle incoming messages
   sock.ev.on("messages.upsert", async (m) => {
-    const message = m.messages[0];
-    const messageText = message.message.conversation;
+    const msg = m.messages[0].message?.conversation?.toLowerCase();
+    const jid = m.messages[0].key.remoteJid;
 
-    console.log(chalk.blue(`[${botConfig.botName}] Message received:`), messageText);
+    console.log(chalk.blue(`[${config.botInfo.name}] Message received:`), msg);
 
-    const replyText = botConfig.autoReply[messageText.toLowerCase()];
-    if (replyText) {
-      await sock.sendMessage(message.key.remoteJid, { text: replyText });
-      console.log(chalk.green(`[${botConfig.botName}] Replied to ${message.key.remoteJid}`));
+    // Auto reply
+    if (config.autoReply.enabled && config.autoReply.messages[msg]) {
+      await sock.sendMessage(jid, { text: config.autoReply.messages[msg] });
     }
   });
 };
