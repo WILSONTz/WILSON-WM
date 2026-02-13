@@ -18,8 +18,9 @@
 ---
 
 ## 1️⃣ FORK REPOSITORY
-[![Fork Repo](https://img.shields.io/badge/Fork-GitHub-blue?logo=github)](https://github.com/WILSONTz/WILSON-WM/fork)  
-[![Download](https://img.shields.io/badge/Download-ZIP-green?logo=github)](https://github.com/WILSONTz/WILSON-WM/archive/refs/heads/main.zip)  
+[![Fork Repo](https://img.shields.io/badge/Fork-GitHub-blue?logo=github&logoColor=white)](https://github.com/WILSONTz/WILSON-WM/fork)  
+[![Download](https://img.shields.io/badge/Download-ZIP-green?logo=github&logoColor=white)](https://github.com/WILSONTz/WILSON-WM/archive/refs/heads/main.zip)  
+[![Session](https://img.shields.io/badge/Get-Session-green?logo=whatsapp&logoColor=white)](https://your-session-link-here)
 
 ---
 
