@@ -1,39 +1,50 @@
 // index.js
-
-import { existsSync, mkdirSync } from "fs";
+import fs from "fs";
+import path from "path";
 import chalk from "chalk";
-import { makeWASocket, useSingleFileAuthState } from "@whiskeysockets/baileys";
-import config from "./config.js";
+import makeWASocket, { useSingleFileAuthState } from "@adiwajshing/baileys";
+import { botConfig } from "./config.js";
 
-// Ensure session folder exists
-if (!existsSync(config.session.folder)) mkdirSync(config.session.folder);
+// Create session folder if not exists
+const sessionFolder = path.dirname(botConfig.sessionFilePath);
+if (!fs.existsSync(sessionFolder)) fs.mkdirSync(sessionFolder, { recursive: true });
 
-// WhatsApp authentication
-const { state, saveState } = useSingleFileAuthState(
-  `${config.session.folder}/${config.session.sessionFile}`
-);
+// Initialize WhatsApp auth
+const { state, saveState } = useSingleFileAuthState(botConfig.sessionFilePath);
 
 const startBot = async () => {
-  console.log(chalk.green(`[${config.botInfo.name}] Starting bot...`));
+  console.log(chalk.green(`[${botConfig.botInfo.name}] Starting bot...`));
 
+  // Create WhatsApp socket
   const sock = makeWASocket({
     auth: state,
-    printQRInTerminal: true
+    printQRInTerminal: true,
+    logger: undefined
   });
 
+  // Save session updates automatically
   sock.ev.on("creds.update", saveState);
 
+  // Handle incoming messages
   sock.ev.on("messages.upsert", async (m) => {
-    const msg = m.messages[0].message?.conversation?.toLowerCase();
-    const jid = m.messages[0].key.remoteJid;
+    try {
+      const msg = m.messages[0];
+      if (!msg.message) return;
 
-    console.log(chalk.blue(`[${config.botInfo.name}] Message received:`), msg);
+      const sender = msg.key.remoteJid;
+      console.log(chalk.blue(`[${botConfig.botInfo.name}] Message received from ${sender}:`), msg.message);
 
-    // Auto reply
-    if (config.autoReply.enabled && config.autoReply.messages[msg]) {
-      await sock.sendMessage(jid, { text: config.autoReply.messages[msg] });
+      // Example: Auto-reply to "hi"
+      if (msg.message.conversation?.toLowerCase() === "hi") {
+        await sock.sendMessage(sender, { text: `Hello! I am ${botConfig.botInfo.name} 🤖` });
+      }
+    } catch (err) {
+      console.log(chalk.red(`[${botConfig.botInfo.name}] Error handling message:`), err);
     }
   });
+
+  console.log(chalk.green(`[${botConfig.botInfo.name}] Bot is running!`));
 };
 
+// Start bot
 startBot();
