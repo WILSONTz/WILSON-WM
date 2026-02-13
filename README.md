@@ -9,22 +9,28 @@
 
 ---
 
-## ⚡ Ultimate WhatsApp Bot Features
+## ⚡ Features
 - Full Menu & Commands  
-- Games  
-- Download Media  
-- AI Features  
+- Games & Media Download  
+- AI Integration  
 - Session Pairing  
 
 ---
 
 ## 1️⃣ FORK REPOSITORY
-Click [**Fork Repo**](https://github.com/YOURUSERNAME/WILSON-WM/fork) to create your own copy.
+[![Fork Repo](https://img.shields.io/badge/Fork-GitHub-blue?logo=github)](https://github.com/WILSONTz/WILSON-WM/fork)  
+[![Download](https://img.shields.io/badge/Download-ZIP-green?logo=github)](https://github.com/WILSONTz/WILSON-WM/archive/refs/heads/main.zip)  
 
 ---
 
-## 2️⃣ GET SESSION ID
-Start your pairing server:
+## 2️⃣ DEPLOY BOT (Mobile Friendly)
+- You can use **Katabump / Replit** to run the bot on your device  
+- Ensure Node.js environment is supported  
+
+---
+
+## 3️⃣ GET SESSION ID (WhatsApp)
+Start your pairing server locally on Katabump / Replit:
 
 ```bash
 npm install
