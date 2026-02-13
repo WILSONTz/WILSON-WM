@@ -1,7 +1,12 @@
-# WILSON WM 🚀
+<p align="center">
+  <img src="https://raw.githubusercontent.com/WILSONTz/WILSON-WM/29b139a0bf5b7767b9ed12551122a69fe21dcff3/_20260212_221303.JPG" width="500">
+</p>
 
-![WILSON WM Logo](https://link-to-your-logo.png)
+<h1 align="center">WILSON WM</h1>
 
+<p align="center">
+  Powerful WhatsApp Bot • Fast • Reliable
+</p>
 **Ultimate WhatsApp Bot with:**
 - Full Menu & Commands
 - Games
